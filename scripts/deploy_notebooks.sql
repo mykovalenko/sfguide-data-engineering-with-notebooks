@@ -21,9 +21,9 @@ CREATE OR REPLACE NOTEBOOK IDENTIFIER('"DEMO"."PYPLINES_{{env}}"."NB_Demo_Pyplin
 
 ALTER NOTEBOOK "DEMO"."PYPLINES_{{env}}"."NB_Demo_Pyplines_{{env}}_06_load_excel_files" ADD LIVE VERSION FROM LAST;
 
-CREATE OR REPLACE NOTEBOOK IDENTIFIER('"DEMO"."PYPLINES_{{env}}"."NB_Demo_Pyplines_{{env}}_07_load_daily_city_metrics"')
+CREATE OR REPLACE NOTEBOOK IDENTIFIER('"DEMO"."PYPLINES_{{env}}"."NB_Demo_Pyplines_{{env}}_07_load_city_metrics"')
     FROM '@"DEMO"."PYPLINES"."REPO_GIT_DEMO_PYPLINES"/branches/"{{branch}}"/notebooks/07_load_daily_city_metrics/'
     QUERY_WAREHOUSE = 'WH_DEMO_PYPLINES'
-    MAIN_FILE = '07_load_daily_city_metrics.ipynb';
+    MAIN_FILE = '07_load_city_metrics.ipynb';
 
 ALTER NOTEBOOK "DEMO"."PYPLINES_{{env}}"."NB_Demo_Pyplines_{{env}}_07_load_daily_city_metrics" ADD LIVE VERSION FROM LAST;
