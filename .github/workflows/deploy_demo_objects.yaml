@@ -44,4 +44,4 @@ jobs:
           rm /home/runner/sf_rsa_key.p8
 
           : # Ideally both Snow CLI and the Python Connector could be configured entirely from env variables
-          : #python $GITHUB_WORKSPACE/scripts/deploy_task_dag.py DEMO_DB PROD_SCHEMA
+          : #python $GITHUB_WORKSPACE/scripts/deploy_task_dag.py DEMO PYPLINES_PRO
