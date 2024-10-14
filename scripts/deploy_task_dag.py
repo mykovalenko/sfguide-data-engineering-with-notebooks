@@ -14,19 +14,19 @@ from datetime import timedelta
 # Create the tasks using the DAG API
 def main(session: Session, database_name, schema_name) -> str:
     # Set the environment context
-    env = 'PROD' if schema_name == 'PROD_SCHEMA' else 'DEV'
+    env = 'PRO' if schema_name == 'PYPLINES_PRO' else 'DEV'
     session.use_schema(f"{database_name}.{schema_name}")
 
-    warehouse_name = "DEMO_WH"
-    dag_name = "DEMO_DAG"
+    warehouse_name = "WH_DEMO_PYPLINES"
+    dag_name = "DAG_DEMO_PYPLINES"
     api_root = Root(session)
     schema = api_root.databases[database_name].schemas[schema_name]
     dag_op = DAGOperation(schema)
 
     # Define the DAG
     with DAG(dag_name, schedule=timedelta(days=1), warehouse=warehouse_name) as dag:
-        dag_task1 = DAGTask("LOAD_EXCEL_FILES_TASK", definition=f'''EXECUTE NOTEBOOK "{database_name}"."{schema_name}"."{env}_06_load_excel_files"()''', warehouse=warehouse_name)
-        dag_task2 = DAGTask("LOAD_DAILY_CITY_METRICS", definition=f'''EXECUTE NOTEBOOK "{database_name}"."{schema_name}"."{env}_07_load_daily_city_metrics"()''', warehouse=warehouse_name)
+        dag_task1 = DAGTask("TSK_LOAD_EXCEL_FILES", definition=f'''EXECUTE NOTEBOOK "{database_name}"."{schema_name}"."NB_Demo_Pyplines_{env}_06_load_excel_files"()''', warehouse=warehouse_name)
+        dag_task2 = DAGTask("TSK_LOAD_CITY_METRICS", definition=f'''EXECUTE NOTEBOOK "{database_name}"."{schema_name}"."NB_Demo_Pyplines_{env}_07_load_daily_city_metrics"()''', warehouse=warehouse_name)
 
         # Define the dependencies between the tasks
         dag_task1 >> dag_task2 # dag_task1 is a predecessor of dag_task2
